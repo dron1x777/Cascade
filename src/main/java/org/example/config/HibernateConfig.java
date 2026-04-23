@@ -1,8 +1,7 @@
 package org.example.config;
 
 import jakarta.persistence.EntityManager;
-import org.example.entity.Book;
-import org.example.entity.Library;
+import org.example.entity.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
@@ -15,14 +14,16 @@ public class HibernateConfig {
         properties.put(Environment.JAKARTA_JDBC_URL, "jdbc:postgresql://localhost:5432/postgres");
         properties.put(Environment.JAKARTA_JDBC_USER, "postgres");
         properties.put(Environment.JAKARTA_JDBC_PASSWORD, "1234");
-        properties.put(Environment.HBM2DDL_AUTO, "create");
+        properties.put(Environment.HBM2DDL_AUTO, "update");
         properties.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
         properties.put(Environment.SHOW_SQL, true);
 
         Configuration configuration = new Configuration();
         configuration.addProperties(properties);
-        configuration.addAnnotatedClass(Library.class);
-        configuration.addAnnotatedClass(Book.class);
+        configuration.addAnnotatedClass(Comment.class);
+        configuration.addAnnotatedClass(Post.class);
+        configuration.addAnnotatedClass(Profile.class);
+        configuration.addAnnotatedClass(User.class);
         return configuration.buildSessionFactory().createEntityManager();
     }
 }
